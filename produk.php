@@ -1,0 +1,138 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Produk | TahuNutrifeed</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+    <a class="brand" href="index.html">
+        <span class="leaf">♻️</span> TahuNutrifeed
+    </a>
+
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a class="active" href="produk.html">Produk</a>
+        <a href="tentang.html">Tentang Kami</a>
+        <a href="dampak.html">Dampak</a>
+    </nav>
+
+    <a class="btn small" href="https://wa.me/6287765470125" target="_blank">
+        Hubungi Kami ↗
+    </a>
+</header>
+
+<section class="page-banner">
+    <span class="eyebrow">KATALOG TAHUNUTRIFEED</span>
+    <h1>Produk untuk kebutuhan ternak</h1>
+    <p>Informasi harga dan stok dapat dikonfirmasi langsung kepada pengelola.</p>
+</section>
+
+<main class="section">
+
+    <form class="search" id="searchForm">
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Cari produk..."
+            aria-label="Cari produk"
+        >
+        <button class="btn" type="submit">Cari produk</button>
+    </form>
+
+    <div class="product-grid" id="productGrid">
+
+        <article class="product" data-name="pakan campuran ampas tahu">
+            <div class="product-image">
+                <img src="assets/pakan-campuran.jpg"
+                     alt="Pakan Campuran Ampas Tahu"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+                <div class="product-placeholder" style="display:none">🌾</div>
+            </div>
+            <div class="product-body">
+                <h3>Pakan Campuran</h3>
+                <p>Produk campuran berbahan ampas tahu. Komposisi dan petunjuk pemakaian perlu dikonfirmasi kepada pengelola.</p>
+                <div class="price">Rp 4.500 <small>/ kg (konfirmasi)</small></div>
+                <a class="btn full" href="https://wa.me/6287765470125?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20Pakan%20Campuran">Lihat detail</a>
+            </div>
+        </article>
+
+        <article class="product" data-name="ampas tahu kering">
+            <div class="product-image">
+                <img src="assets/ampas-tahu-kering.jpg"
+                     alt="Ampas Tahu Kering"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+                <div class="product-placeholder" style="display:none">🌾</div>
+            </div>
+            <div class="product-body">
+                <h3>Ampas Tahu Kering</h3>
+                <p>Pilihan ampas tahu kering untuk kebutuhan pakan ternak. Ketersediaan dan berat kemasan dapat dikonfirmasi.</p>
+                <div class="price">Rp 3.000 <small>/ kg (konfirmasi)</small></div>
+                <a class="btn full" href="https://wa.me/6287765470125?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20Ampas%20Tahu%20Kering">Lihat detail</a>
+            </div>
+        </article>
+
+        <article class="product" data-name="pelet pakan campuran ampas tahu">
+            <div class="product-image">
+                <img src="assets/pelet-pakan-campuran.jpg"
+                     alt="Pelet Pakan Campuran Ampas Tahu"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+                <div class="product-placeholder" style="display:none">🌾</div>
+            </div>
+            <div class="product-body">
+                <h3>Pelet Pakan Campuran Ampas Tahu</h3>
+                <p>Pakan berbentuk pelet berbahan campuran ampas tahu. Detail komposisi dan penggunaannya perlu dikonfirmasi.</p>
+                <div class="price">Rp 5.000 <small>/ kg (konfirmasi)</small></div>
+                <a class="btn full" href="https://wa.me/6287765470125?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20Pelet%20Pakan%20Campuran">Lihat detail</a>
+            </div>
+        </article>
+
+    </div>
+
+    <p id="noResults" style="display:none;text-align:center;margin-top:25px">
+        Produk tidak ditemukan.
+    </p>
+
+</main>
+
+<footer>
+    <a class="brand" href="index.html">♻️ TahuNutrifeed</a>
+    <p>UD. Tahu Yaya · Abian Tubuh, Sandubaya, Kota Mataram</p>
+</footer>
+
+<script>
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
+const products = document.querySelectorAll('.product');
+const noResults = document.getElementById('noResults');
+
+function filterProducts() {
+    const query = searchInput.value.toLowerCase().trim();
+    let found = 0;
+
+    products.forEach(product => {
+        const name = product.dataset.name.toLowerCase();
+        const description = product.querySelector('p').textContent.toLowerCase();
+        const match = name.includes(query) || description.includes(query);
+
+        product.style.display = match ? '' : 'none';
+        if (match) found++;
+    });
+
+    noResults.style.display = found === 0 ? 'block' : 'none';
+}
+
+searchForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    filterProducts();
+});
+
+searchInput.addEventListener('input', filterProducts);
+</script>
+
+</body>
+</html>

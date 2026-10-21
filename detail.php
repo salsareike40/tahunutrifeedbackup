@@ -1,0 +1,135 @@
+```html
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Detail Produk | TahuNutrifeed</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+    <a class="brand" href="index.html">
+        <span class="leaf">♻️</span> TahuNutrifeed
+    </a>
+
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="tentang.html">Tentang Kami</a>
+        <a href="dampak.html">Dampak</a>
+    </nav>
+
+    <a class="btn small" href="https://wa.me/6287765470125" target="_blank">
+        Hubungi Kami ↗
+    </a>
+</header>
+
+<main class="section">
+    <p><a href="produk.html">← Kembali ke produk</a></p>
+
+    <div class="detail-grid">
+        <div class="detail-image" id="detailImage">
+            <div class="product-placeholder big">🌾</div>
+        </div>
+
+        <div>
+            <span class="eyebrow">PRODUK TAHUNUTRIFEED</span>
+            <h1 id="productName">Detail Produk</h1>
+
+            <div class="price large" id="productPrice">
+                Harga dikonfirmasi admin
+                <small>/ kg (konfirmasi)</small>
+            </div>
+
+            <p id="productDescription">
+                Informasi produk dapat ditanyakan langsung kepada pengelola.
+            </p>
+
+            <div class="info-box">
+                <b>Informasi produk</b>
+                <p id="productInfo">
+                    Konfirmasi harga, berat kemasan, komposisi, dan
+                    ketersediaan kepada pengelola sebelum membeli.
+                </p>
+            </div>
+
+            <a class="btn" id="orderButton" href="pesan.html">
+                Pesan Produk ↗
+            </a>
+
+            <a class="btn outline" id="askButton"
+               href="https://wa.me/6287765470125"
+               target="_blank">
+                Tanya via WhatsApp
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <a class="brand" href="index.html">♻️ TahuNutrifeed</a>
+    <p>UD. Tahu Yaya · Kota Mataram</p>
+</footer>
+
+<script>
+const products = {
+    "campuran": {
+        name: "Pakan Campuran Ampas Tahu",
+        price: "Rp 4.500",
+        image: "assets/pakan-campuran.jpg",
+        description: "Produk campuran berbahan ampas tahu untuk kebutuhan pakan ternak.",
+        info: "Harga, berat kemasan, komposisi, dan ketersediaan perlu dikonfirmasi kepada pengelola."
+    },
+    "kering": {
+        name: "Ampas Tahu Kering",
+        price: "Rp 3.000",
+        image: "assets/ampas-tahu-kering.jpg",
+        description: "Ampas tahu kering yang dapat dipertimbangkan sebagai bahan pakan ternak.",
+        info: "Konfirmasi harga, berat kemasan, dan ketersediaan kepada pengelola sebelum membeli."
+    },
+    "pelet": {
+        name: "Pelet Pakan Campuran Ampas Tahu",
+        price: "Rp 5.000",
+        image: "assets/pelet-pakan-campuran.jpg",
+        description: "Pakan berbentuk pelet berbahan campuran ampas tahu.",
+        info: "Konfirmasi komposisi, cara penggunaan, harga, dan ketersediaan kepada pengelola."
+    }
+};
+
+const params = new URLSearchParams(window.location.search);
+const key = params.get("produk") || "campuran";
+const product = products[key] || products["campuran"];
+const wa = "6287765470125";
+
+document.title = product.name + " | TahuNutrifeed";
+document.getElementById("productName").textContent = product.name;
+document.getElementById("productPrice").innerHTML =
+    product.price + ' <small>/ kg (konfirmasi)</small>';
+document.getElementById("productDescription").textContent = product.description;
+document.getElementById("productInfo").textContent = product.info;
+
+const detailImage = document.getElementById("detailImage");
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.onerror = function() {
+    this.remove();
+};
+detailImage.prepend(img);
+
+document.getElementById("orderButton").href =
+    "pesan.html?produk=" + encodeURIComponent(key);
+
+const message = "Halo TahuNutrifeed, saya ingin bertanya/memesan: " +
+    product.name +
+    ". Mohon informasi harga, berat kemasan, dan ketersediaan stok.";
+
+document.getElementById("askButton").href =
+    "https://wa.me/" + wa + "?text=" + encodeURIComponent(message);
+</script>
+
+</body>
+</html>
+```
